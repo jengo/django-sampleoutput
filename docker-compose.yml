@@ -1,0 +1,49 @@
+version: '3'
+
+networks:
+  jengo_django:
+
+services:
+  django:
+    build: .
+    env_file: .env
+    networks:
+      - jengo_django
+    ports:
+      - "8000:8000"
+    # Allows running container in dev mode, which loads using bash instead of manage.py
+    # Exceptions during development won't require rebuilding the containers
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+  # Build nginx instead of just running, less sloppy way to generate a self signed cert
+  nginx:
+    networks:
+      - jengo_django
+    build: nginx
+    ports:
+      - "${NGINX_HTTP_PORT}:80"
+      - "${NGINX_HTTPS_PORT}:443"
+    labels:
+      - "com.joped.jengo_django.description=jengo Django nginx"
+    links:
+      - django
+    restart: always
+  db:
+    image: mysql
+    networks:
+      - jengo_django
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - jengo_django_mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_DATABASE: jengo_django
+      MYSQL_USER: jengo_django
+      MYSQL_PASSWORD: changeme
+    labels:
+      - "com.joped.jengo_django.description=jengo Django MySQL"
+volumes:
+  jengo_django_mysql_data:
