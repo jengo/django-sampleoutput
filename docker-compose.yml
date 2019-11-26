@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 networks:
   jengo_django:
@@ -9,8 +9,6 @@ services:
     env_file: .env
     networks:
       - jengo_django
-    ports:
-      - "8000:8000"
     # Allows running container in dev mode, which loads using bash instead of manage.py
     # Exceptions during development won't require rebuilding the containers
     stdin_open: true
@@ -22,28 +20,28 @@ services:
     networks:
       - jengo_django
     build: nginx
+    env_file: .env
     ports:
-      - "${NGINX_HTTP_PORT}:80"
-      - "${NGINX_HTTPS_PORT}:443"
-    labels:
-      - "com.joped.jengo_django.description=jengo Django nginx"
+      - "${NGINX_HTTP_PORT}"
+      - "${NGINX_HTTPS_PORT}"
     links:
       - django
     restart: always
   db:
-    image: mysql
+    # Ran into an SSL bug using latest tag, rolling back to 5.7 which works
+    # TODO: Troubleshoot
+    image: mysql:5.7
+    env_file: .env
     networks:
       - jengo_django
     ports:
-      - "${MYSQL_PORT}:3306"
+      - "${MYSQL_PORT}"
     volumes:
-      - jengo_django_mysql_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: changeme
-      MYSQL_DATABASE: jengo_django
-      MYSQL_USER: jengo_django
-      MYSQL_PASSWORD: changeme
-    labels:
-      - "com.joped.jengo_django.description=jengo Django MySQL"
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
 volumes:
-  jengo_django_mysql_data:
+  mysql_data:
