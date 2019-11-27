@@ -2,6 +2,8 @@
 
 all: clean depends test
 
+TEST=jengo_django_sampleoutput
+
 # Sometimes rebuilds of a project can cause lingering layers which really mess things up
 # But not using cache can also slow down development
 # You can turn caching back off caching by using COMPOSE_BUILD_OPT="--force-recreate" make
@@ -18,6 +20,12 @@ NGINX_HTTPS_PORT?=443:443
 clean:
 # If they aren't found, don't error out
 	-docker-compose rm -f
+
+include .env
+create_admin:
+	docker-compose exec django python manage.py shell -c \
+	 	"from django.contrib.auth import get_user_model; User = get_user_model(); \
+		 User.objects.create_superuser('${DJANGO_ADMIN_USER}', 'admin@example.com', '${DJANGO_ADMIN_PASSWORD}')"
 
 depends:
 	docker-compose up --build -d --remove-orphans
