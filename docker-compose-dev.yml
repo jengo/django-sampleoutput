@@ -27,5 +27,4 @@ services:
     tty: true
     depends_on:
       - db
-      - etcd
     command: 'bash'
