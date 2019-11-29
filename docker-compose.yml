@@ -19,6 +19,14 @@ services:
       - static:/static
     depends_on:
       - db
+      - etcd
+  # Allows local dev migration framework that only 1 pod will run migrations
+  etcd:
+    image: bitnami/etcd:3
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+    networks:
+      - jengo_django
   # Intended for local dev
   # Supports multiple database types unlike pgAdmin or phpMyAdmin
   # Possible TODO would be to add this as a configurable option ?

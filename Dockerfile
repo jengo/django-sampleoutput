@@ -9,7 +9,7 @@ ADD requirements.txt /app
 RUN pip install --upgrade pip \
 	&& pip install --no-cache-dir -r /app/requirements.txt \
 	&& apt-get update \
-	&& apt-get install -y nginx \
+	&& apt-get install -y nginx etcd-client \
 	&& rm -fr /var/lib/apt/lists
 
 ADD . /app
