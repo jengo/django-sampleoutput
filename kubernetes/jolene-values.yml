@@ -1,3 +1,6 @@
 # Sample of a specific environment
 rev: 3
 
+redis:
+  cluster:
+    enabled: false
