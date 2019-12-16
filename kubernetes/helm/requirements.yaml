@@ -1,8 +1,7 @@
 dependencies:
-  # - name: django
-  #   version: 0.1.0+2
-  #   repository: https://raw.githubusercontent.com/jengo/helm-django/prototype/
-
+  - name: helm-django
+    version: 0.1.0+2
+    repository: https://raw.githubusercontent.com/jengo/helm-django/prototype/
   - name: redis
     version: 10.2.1
     repository: https://kubernetes-charts.storage.googleapis.com/
