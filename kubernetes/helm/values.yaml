@@ -1,2 +1,7 @@
 # Default values for all of your environments
 
+helm-django:
+  image:
+    repository: joped/django-sampleoutput
+    tag: latest
+    pullPolicy: Always
