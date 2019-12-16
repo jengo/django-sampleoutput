@@ -1,6 +1,6 @@
 dependencies:
   - name: helm-django
-    version: 0.1.0+2
+    version: 0.1.0+3
     repository: https://raw.githubusercontent.com/jengo/helm-django/prototype/
   - name: redis
     version: 10.2.1
