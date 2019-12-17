@@ -6,7 +6,7 @@ redis:
     enabled: false
 
 helm-django:
-  replicas: 2
+  replicaCount: 2
   revisionHistoryLimit: 2
   env:
     - name: SECRET_KEY
