@@ -10,17 +10,17 @@ helm-django:
     - name: SECRET_KEY
       valueFrom:
         secretKeyRef:
-          name: mysecret
+          name: jolene-test1
           key: SECRET_KEY
     - name: DATABASE_URL
       valueFrom:
         secretKeyRef:
-          name: mysecret
+          name: jolene-test1
           key: DATABASE_URL
     - name: DB_ENGINE
       value: django.db.backends.postgresql
     - name: DB_HOST
       valueFrom:
         secretKeyRef:
-          name: mysecret
+          name: jolene-test1
           key: DB_HOST
