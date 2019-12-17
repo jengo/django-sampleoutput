@@ -5,9 +5,10 @@ redis:
   cluster:
     enabled: false
 
-env:
-  - name: SECRET_KEY
-    valueFrom:
-      secretKeyRef:
-        name: mysecret
-        key: SECRET_KEY
+helm-django:
+  env:
+    - name: SECRET_KEY
+      valueFrom:
+        secretKeyRef:
+          name: mysecret
+          key: SECRET_KEY
