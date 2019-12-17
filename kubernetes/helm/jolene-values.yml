@@ -10,7 +10,7 @@ helm-django:
     - name: SECRET_KEY
       valueFrom:
         secretKeyRef:
-          name: jolene-test1
+          name: mysecret
           key: SECRET_KEY
     - name: DATABASE_URL
       valueFrom:
