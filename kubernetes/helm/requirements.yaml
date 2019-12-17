@@ -1,6 +1,6 @@
 dependencies:
   - name: helm-django
-    version: 0.1.0+4
+    version: 0.1.0+6
     repository: https://jengo.github.io/helm-charts/
   - name: redis
     version: 10.2.1

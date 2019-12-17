@@ -1,5 +1,5 @@
 # Sample of a specific environment
-rev: 3
+rev: 4
 
 redis:
   cluster:
