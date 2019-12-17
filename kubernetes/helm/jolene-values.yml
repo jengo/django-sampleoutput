@@ -16,7 +16,7 @@ helm-django:
       valueFrom:
         secretKeyRef:
           name: mysecret
-          key: host
+          key: DATABASE_URL
     - name: DB_ENGINE
       value: django.db.backends.postgresql
     - name: DB_HOST
