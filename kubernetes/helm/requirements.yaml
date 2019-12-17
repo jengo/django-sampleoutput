@@ -1,7 +1,7 @@
 dependencies:
   - name: helm-django
-    version: 0.1.0+3
-    repository: https://raw.githubusercontent.com/jengo/helm-django/prototype/
+    version: 0.1.0+4
+    repository: https://jengo.github.io/helm-charts/
   - name: redis
     version: 10.2.1
     repository: https://kubernetes-charts.storage.googleapis.com/
