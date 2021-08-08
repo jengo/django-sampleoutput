@@ -49,18 +49,21 @@ services:
       - django
     restart: always
   db:
-    image: postgres
+    # Ran into an SSL bug using latest tag, rolling back to 5.7 which works
+    # TODO: Troubleshoot
+    image: mysql:5.7
     env_file: .env
     networks:
       - jengo_django
     ports:
-      - "${POSTGRES_PORT}"
+      - "${MYSQL_PORT}"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
     environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
 volumes:
-  postgres_data:
+  mysql_data:
   static:
