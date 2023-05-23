@@ -13,7 +13,7 @@ coverage2clover==3.2.1
 pylint==2.9.6
 pyvalid==1.0.4
 pytest-benchmark==3.4.1
-requests==2.26.0
+requests==2.31.0
 django-simple-history==3.0.0
 django-mako-plus==5.11.2
 six==1.16.0
